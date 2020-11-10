@@ -3,6 +3,7 @@ import * as express from 'express';
 import * as http from 'http';
 import * as moment from 'moment';
 import * as db from 'zapatos';
+import type * as s from 'zapatos/schema';
 
 import * as config from './config';
 import pool from './db/pool';
@@ -15,9 +16,11 @@ export function asyncRequestHandler(fn: express.RequestHandler): express.Request
 }
 
 app.get('/', asyncRequestHandler(async function (req, res) {
-  const quoteData = await db.selectOne('quotes', db.all,
-    { order: { by: db.sql`random()`, direction: 'ASC' } }).run(pool) ??
-    { quote: 'Empty database makes for poor quotes service', attribution: null };
+  const
+    quoteWhere: s.quotes.Whereable = { quote: db.sql`${db.self} IS NOT NULL` },
+    quoteData = await db.selectOne('quotes', quoteWhere,
+      { order: { by: db.sql`random()`, direction: 'ASC' } }).run(pool) ??
+      { quote: 'Empty database makes for poor quotes service', attribution: null };
 
   res.set('Content-Type', 'text/plain');
   res.status(200).send(`${quoteData.quote}

@@ -29,7 +29,7 @@
   "scripts": {
     "start": "npm run build:live",
     "build": "tsc -p .",
-    "build:live": "source env/dev; nodemon --watch 'src/**/*.ts' --exec node --inspect -r ts-node/register src/index.ts",
+    "build:live": "source env/dev; TS_NODE_FILES=true nodemon --watch 'src/**/*.ts' --exec node --inspect -r ts-node/register src/index.ts",
     "test": "source env/test; jest",
     "updateSchema": "source env/dev; npx --no-install zapatos",
     "dumpSchema": "source env/dev; pg_dump --no-owner -s ${DATABASE_URL} > schema/$(date '+%Y-%m-%d_%H%M').psql"

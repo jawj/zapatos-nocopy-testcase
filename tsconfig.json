@@ -1,0 +1,23 @@
+{
+  "compileOnSave": true,
+  "include": [
+    "src/**/*"
+  ],
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "lib",
+    "target": "es2017",
+    "module": "CommonJS",
+    "typeRoots": [
+      "node_modules/@types",
+      "__mocks__/types"
+    ],
+    "sourceMap": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "strictPropertyInitialization": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+  },
+}

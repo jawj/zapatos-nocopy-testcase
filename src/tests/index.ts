@@ -1,7 +1,7 @@
 
 import * as supertest from 'supertest';
 import * as moment from 'moment';
-import * as db from 'zapatos';
+import * as db from 'zapatos/db';
 import * as s from 'zapatos/schema';
 
 import { app } from '../index';

@@ -2,7 +2,7 @@
 import * as express from 'express';
 import * as http from 'http';
 import * as moment from 'moment';
-import * as db from 'zapatos';
+import * as db from 'zapatos/db';
 import type * as s from 'zapatos/schema';
 
 import * as config from './config';

@@ -10,6 +10,7 @@ Released under the MIT licence: see LICENCE file
 declare module 'zapatos/schema' {
 
   import type * as db from 'zapatos/db';
+  import type * as c from 'zapatos/custom';
 
   // got a type error on schemaVersionCanary below? update by running `npx zapatos`
   export interface schemaVersionCanary extends db.SchemaVersionCanary { version: 'a' }
@@ -39,11 +40,13 @@ declare module 'zapatos/schema' {
       id: number;
       quote: string;
       attribution: string | null;
+      location: c.PgGeometry | null;
     }
     export interface Insertable {
       id?: number | db.Parameter<number> | db.DefaultType | db.SQLFragment;
       quote: string | db.Parameter<string> | db.SQLFragment;
       attribution?: string | db.Parameter<string> | null | db.DefaultType | db.SQLFragment;
+      location?: c.PgGeometry | db.Parameter<c.PgGeometry> | null | db.DefaultType | db.SQLFragment;
     }
     export interface Updatable extends UpdatableFromInsertable<Insertable> { }
     export interface Whereable extends WhereableFromInsertable<Insertable> { }

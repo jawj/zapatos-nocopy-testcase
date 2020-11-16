@@ -4,6 +4,7 @@ import * as http from 'http';
 import * as moment from 'moment';
 import * as db from 'zapatos/db';
 import type * as s from 'zapatos/schema';
+import type * as c from 'zapatos/custom';
 
 import * as config from './config';
 import pool from './db/pool';
@@ -20,13 +21,13 @@ app.get('/', asyncRequestHandler(async function (req, res) {
     quoteWhere: s.quotes.Whereable = { quote: db.sql`${db.self} IS NOT NULL` },
     quoteData = await db.selectOne('quotes', quoteWhere,
       { order: { by: db.sql`random()`, direction: 'ASC' } }).run(pool) ??
-      { quote: 'Empty database makes for poor quotes service', attribution: null };
+      { quote: 'Empty database makes for poor quotes service', attribution: null, location: null };
 
   res.set('Content-Type', 'text/plain');
   res.status(200).send(`${quoteData.quote}
 — ${quoteData.attribution ?? 'Anonymous'}
 
-(${moment().toISOString()})`);
+(${moment().toISOString()} at ${quoteData.location ?? 'unknown location'})`);
 }));
 
 

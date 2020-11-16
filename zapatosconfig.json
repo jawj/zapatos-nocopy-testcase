@@ -2,5 +2,17 @@
   "db": {
     "connectionString": "{{DATABASE_URL}}"
   },
-  "outDir": "./src/db"
+  "outDir": "./src/db",
+  "schemas": {
+    "public": {
+      "include": "*",
+      "exclude": [
+        "geography_columns",
+        "geometry_columns",
+        "raster_columns",
+        "raster_overviews",
+        "spatial_ref_sys"
+      ]
+    }
+  }
 }
